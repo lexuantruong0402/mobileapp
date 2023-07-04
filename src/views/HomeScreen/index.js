@@ -6,7 +6,15 @@ import Header from '../../components/Header';
 import Bottom from '../../components/Bottom';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const handlePressAccount = () => {
+    navigation.navigate('ListAccount');
+  };
+
+  const handlePressReport = () => {
+    navigation.navigate('Report');
+  };
+
   return (
     <View style={styles.container}>
       <Header></Header>
@@ -26,52 +34,17 @@ const Home = () => {
           </View>
 
           <View style={styles.containerMenu}>
-            <Text style={{ fontSize: 18, marginTop: 0 }}>Danh mục chính</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="home" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black' }}>Trang chủ</Text>
+              <TouchableOpacity  onPress={handlePressAccount} style={styles.menuItem} >
+                <FontAwesome name="user" size={30} color={TwitterColors.Blue}/>
+                <Text style={{ fontSize: 16, color: 'black' }}>Tài khoản</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="envelope" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black' }}>Hộp thư</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="user" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black'}}>Tài khoản</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="cog" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black'}}>Cài đặt</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="camera" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black' }}>Máy ảnh</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="globe" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black'}}>Ngôn ngữ</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="bell" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black' }}>Thông báo</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="lock" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black'  }}>Bảo mật</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuItem}>
-                <FontAwesome name="question-circle" size={30} color={TwitterColors.Blue} />
-                <Text style={{ fontSize: 16, color: 'black' }}>Trợ giúp</Text>
+              <TouchableOpacity  onPress={handlePressReport} style={styles.menuItem}>
+                <FontAwesome name="bar-chart" size={30} color={TwitterColors.Blue} />
+                <Text style={{ fontSize: 16, color: 'black' }}>Báo cáo</Text>
               </TouchableOpacity>
             </View>
           </View>
-
-          
         </View>
       </View>
       <Bottom></Bottom>
@@ -112,7 +85,9 @@ const styles = StyleSheet.create({
     backgroundColor: TwitterColors.Extra_Light_Gray,
     borderRadius: 10,
     padding: 10,
-    marginHorizontal: 5,
+    marginHorizontal: 10,
+    width: 100,
+    height: 80
   },
   box2: {
     flex: 8,

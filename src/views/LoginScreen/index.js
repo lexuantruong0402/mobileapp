@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { client } from '../../helpers/api';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
@@ -15,7 +16,13 @@ const LoginScreen = () => {
     client.post('/api/public/login/admin', credentials)
       .then((response) => {
         // handle successful login
-        navigation.navigate('Home');
+        AsyncStorage.setItem('accessToken', response.data.accessToken)
+          .then(() => {
+            navigation.navigate('Home');
+          })
+          .catch((error) => {
+            setError('Failed to save access token');
+          });
       })
       .catch((error) => {
         // handle login error

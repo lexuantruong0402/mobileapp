@@ -27,15 +27,17 @@ const DATA = [
   },
 ];
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, onPress }) => {
   return (
-    <View style={styles.listItem}>
-      <Image source={{ uri: item.avatar }} style={styles.avatar} />
-      <View style={{ marginLeft: 10 }}>
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
-        <Text style={{ fontSize: 14, color: TwitterColors.Gray }}>{item.phone}</Text>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.listItem}>
+        <Image source={{ uri: item.avatar }} style={styles.avatar} />
+        <View style={{ marginLeft: 10 }}>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
+          <Text style={{ fontSize: 14, color: TwitterColors.Gray }}>{item.phone}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -43,33 +45,33 @@ const ListAccountScreen = () => {
   const [searchText, setSearchText] = useState('');
 
   const renderItem = ({ item }) => {
-    return <ListItem item={item} />;
+    return <ListItem item={item} onPress={() => console.log('View details of', item.name)} />;
   };
 
   return (
     <View style={styles.container}>
-      <Header></Header>
+      <Header />
       <View style={styles.box2}>
-      <Text style={{ fontSize: 20, color:'white' }}>Danh sách</Text>
-        <View style={styles.searchBar}>
-          <FontAwesome name="search" size={18} color={TwitterColors.Gray} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Tìm kiếm"
-            value={searchText}
-            onChangeText={setSearchText}
+        <View style={styles.containerData}>
+          <Text style={{ fontSize: 20, color: 'black' }}>Danh sách Account</Text>
+          <View style={styles.searchBar}>
+            <FontAwesome name="search" size={18} color={TwitterColors.Gray} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Tìm kiếm"
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+          </View>
+          <FlatList
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
           />
         </View>
-        <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
-      />
       </View>
-     
-
-      <Bottom></Bottom>
+      <Bottom />
     </View>
   );
 };
@@ -113,6 +115,17 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
+  },
+  containerData: {
+    backgroundColor: TwitterColors.Extra_Extra_Light_Gray,
+    width: '98%',
+    height: '98%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 20,
+    padding: 10,
   },
 });
 

@@ -42,4 +42,5 @@ export const TwitterColors = {
   Light_Gray: '#AAB8C2',
   Extra_Light_Gray: '#E1E8ED',
   Extra_Extra_Light_Gray: '#F5F8FA',
+  White: 'white'
 };
